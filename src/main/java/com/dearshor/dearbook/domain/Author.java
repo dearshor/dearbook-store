@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 @Entity
@@ -24,7 +25,8 @@ public class Author {
 			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}
 	)
 	private Set<Book> books;
-	@Version
+//	@Version // openjpa 不支持
+	@Transient
 	private String version;
 
 	public String getId() {

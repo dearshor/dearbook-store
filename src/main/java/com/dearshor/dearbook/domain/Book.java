@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 @Entity
@@ -30,8 +31,13 @@ public class Book {
 	/**
 	 * 用于乐观锁
 	 */
-	@Version
+//	@Version  //openjpa 不支持
+	@Transient
 	private String version;
+
+	public Book(String name) {
+		setName(name);
+	}
 
 	public String getId() {
 		return id;
