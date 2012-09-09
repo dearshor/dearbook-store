@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+	<repositories base-package="com.dearshor.dearbook.repository" />
+
+	<beans:bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<beans:property name="persistenceUnitPostProcessors">
+			<beans:list>
+				<beans:bean
+					class="org.springframework.data.jpa.support.ClasspathScanningPersistenceUnitPostProcessor">
+					<beans:constructor-arg value="com.dearshor.dearbook.domain" />
+					<beans:property name="mappingFileNamePattern" value="**/*Mapping.xml" />
+				</beans:bean>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+</beans>
