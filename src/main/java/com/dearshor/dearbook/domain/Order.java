@@ -9,7 +9,7 @@ import javax.persistence.Transient;
 //@Entity
 public class Order {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid-string")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
 	private String id;
 	private String flowNo;
 	/**

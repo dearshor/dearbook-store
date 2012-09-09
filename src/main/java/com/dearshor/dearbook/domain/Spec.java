@@ -18,6 +18,16 @@ public class Spec {
 	@Temporal(TemporalType.DATE)
 	private Date publishedAt;
 
+	public Spec() {
+		super();
+	}
+
+	public Spec(String binding, Integer pageCount) {
+		super();
+		this.binding = binding;
+		this.pageCount = pageCount;
+	}
+
 	public Integer getPageCount() {
 		return pageCount;
 	}

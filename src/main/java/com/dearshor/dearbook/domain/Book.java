@@ -16,11 +16,11 @@ public class Book {
 	 * object identifier
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid-string")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
 	private String id;
 	private String name;
 	private String serialName;
-	private String ISBN;
+	private String isbn;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Author author;
 	@Embedded
@@ -35,8 +35,18 @@ public class Book {
 	@Transient
 	private String version;
 
+	public Book() {
+		super();
+	}
+
 	public Book(String name) {
 		setName(name);
+	}
+
+	public Book(String name, String iSBN) {
+		super();
+		this.name = name;
+		isbn = iSBN;
 	}
 
 	public String getId() {
@@ -63,12 +73,12 @@ public class Book {
 		this.serialName = serialName;
 	}
 
-	public String getISBN() {
-		return ISBN;
+	public String getIsbn() {
+		return isbn;
 	}
 
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+	public void setIsbn(String iSBN) {
+		isbn = iSBN;
 	}
 
 	public Author getAuthor() {
@@ -116,7 +126,7 @@ public class Book {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Book [id=").append(id).append(", name=").append(name)
 				.append(", serialName=").append(serialName).append(", ISBN=")
-				.append(ISBN).append(", author=").append(author)
+				.append(isbn).append(", author=").append(author)
 				.append(", press=").append(press).append(", spec=")
 				.append(spec).append(", barcode=").append(barcode)
 				.append(", version=").append(version).append("]");
@@ -127,7 +137,7 @@ public class Book {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ISBN == null) ? 0 : ISBN.hashCode());
+		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((barcode == null) ? 0 : barcode.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -149,10 +159,10 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		if (ISBN == null) {
-			if (other.ISBN != null)
+		if (isbn == null) {
+			if (other.isbn != null)
 				return false;
-		} else if (!ISBN.equals(other.ISBN))
+		} else if (!isbn.equals(other.isbn))
 			return false;
 		if (author == null) {
 			if (other.author != null)

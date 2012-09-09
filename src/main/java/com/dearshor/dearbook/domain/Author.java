@@ -17,17 +17,25 @@ import javax.persistence.Version;
 @Entity
 public class Author {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid-string")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
 	private String id;
 	private String name;
 	private String intro;
-	@OneToMany( mappedBy = "author", fetch = FetchType.LAZY, cascade = {
-			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}
-	)
+	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = {
+			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
 	private Set<Book> books;
-//	@Version // openjpa 不支持
+	// @Version // openjpa 不支持
 	@Transient
 	private String version;
+
+	public Author() {
+		super();
+	}
+
+	public Author(String name) {
+		super();
+		this.name = name;
+	}
 
 	public String getId() {
 		return id;
