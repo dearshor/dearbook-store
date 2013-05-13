@@ -126,7 +126,7 @@ public class Book {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Book [id=").append(id).append(", name=").append(name)
 				.append(", serialName=").append(serialName).append(", ISBN=")
-				.append(isbn).append(", author=").append(author)
+//				.append(isbn).append(", author=").append(author)
 				.append(", press=").append(press).append(", spec=")
 				.append(spec).append(", barcode=").append(barcode)
 				.append(", version=").append(version).append("]");
@@ -164,11 +164,11 @@ public class Book {
 				return false;
 		} else if (!isbn.equals(other.isbn))
 			return false;
-		if (author == null) {
+		/*if (author == null) {
 			if (other.author != null)
 				return false;
 		} else if (!author.equals(other.author))
-			return false;
+			return false;*/
 		if (barcode == null) {
 			if (other.barcode != null)
 				return false;

@@ -1,5 +1,7 @@
 package com.dearshor.dearbook.repository;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +18,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dearshor.dearbook.domain.Author;
 import com.dearshor.dearbook.domain.Book;
@@ -24,6 +29,7 @@ import com.dearshor.dearbook.domain.Spec;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath: **/*-context.xml")
+//@TransactionConfiguration(defaultRollback = false)
 public class BookRepositoryTest {
 	
 	private @Autowired BookRepository bookRepository;
@@ -38,7 +44,7 @@ public class BookRepositoryTest {
 
 	private Press wanJuan;
 	
-	@Before
+	@Before @Transactional
 	public  void prepareData() {
 		LinkedList<Book> bookList = new LinkedList<Book>();
 		
@@ -78,7 +84,7 @@ public class BookRepositoryTest {
 		
 	}
 	
-	@After
+	@After @Transactional
 	public void cleanup() {
 		bookRepository.deleteAll();
 	}
@@ -102,10 +108,15 @@ public class BookRepositoryTest {
 		}
 	}
 	
-	@Test
+	@Test @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 	public void testFindOne() {
 		Book book = bookRepository.findByName("梵花坠影").iterator().next();
+		assertNotNull(book.getAuthor());
+		assertNotNull(book.getAuthor().getId());
+		
 		Book bookCopy = bookRepository.findOne(book.getId());
+		assertNotNull(bookCopy.getAuthor());
+		assertNotNull(bookCopy.getAuthor().getId());
 		Assert.assertEquals(book, bookCopy);
 		logger.debug("查询结果：{}", bookCopy.toString());
 	}

@@ -81,7 +81,7 @@ public class Author {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((books == null) ? 0 : books.hashCode());
+//		result = prime * result + ((books == null) ? 0 : books.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((intro == null) ? 0 : intro.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -126,7 +126,7 @@ public class Author {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Author [id=").append(id).append(", name=").append(name)
 				.append(", intro=").append(intro).append(", books=")
-				.append(books != null ? toString(books, maxLen) : null)
+//				.append(books != null ? toString(books, maxLen) : null)
 				.append("]");
 		return builder.toString();
 	}
