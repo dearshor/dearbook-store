@@ -22,13 +22,14 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dearshor.dearbook.config.RepositoryContext;
 import com.dearshor.dearbook.domain.Author;
 import com.dearshor.dearbook.domain.Book;
 import com.dearshor.dearbook.domain.Press;
 import com.dearshor.dearbook.domain.Spec;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath: **/*-context.xml")
+@ContextConfiguration(classes = RepositoryContext.class)
 //@TransactionConfiguration(defaultRollback = false)
 public class BookRepositoryTest {
 	
